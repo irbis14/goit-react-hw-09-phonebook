@@ -18,11 +18,33 @@ class App extends Component {
     name: "",
   };
 
+  addContact = (newContact) => {
+    const contact = {
+      id: uuidv4(),
+      ...newContact,
+    };
+
+    // Проверка на дублирование имени контакта
+    if (
+      this.state.contacts.find((oldContact) => {
+        return oldContact.name.toLowerCase() === contact.name.toLowerCase();
+      })
+    ) {
+      alert(`${contact.name} is already in contacts`);
+    } else {
+      this.setState((prevState) => {
+        return {
+          contacts: [...prevState.contacts, contact],
+        };
+      });
+    }
+  };
+
   render() {
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm onSubmit={this.addContact} />
         <Contacts>
           <ContactsItem items={this.state.contacts} />
         </Contacts>
