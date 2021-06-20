@@ -1,5 +1,6 @@
 import { Component } from "react";
 import ContactForm from "./components/ContactForm";
+import Filter from "./components/Filter";
 import Contacts from "./components/Contacts";
 import ContactsItem from "./components/ContactsItem";
 
@@ -15,7 +16,7 @@ class App extends Component {
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
-    name: "",
+    filter: "",
   };
 
   addContact = (newContact) => {
@@ -40,13 +41,43 @@ class App extends Component {
     }
   };
 
+  onChangeFilter = (e) => {
+    this.setState({ filter: e.target.value });
+  };
+
+  filterContact = () => {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  deleteContact = (e) => {
+    const { contacts } = this.state;
+    const deleteName = e.target.name;
+    const restContacts = contacts.filter(
+      (contact) => contact.name !== deleteName
+    );
+    this.setState({
+      contacts: restContacts,
+    });
+  };
+
   render() {
+    const { filter } = this.state;
+    const filteredContact = this.filterContact();
+
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
+        <Filter onChangeFilter={this.onChangeFilter} value={filter} />
         <Contacts>
-          <ContactsItem items={this.state.contacts} />
+          <ContactsItem
+            items={filteredContact}
+            onDeleteContact={this.deleteContact}
+          />
         </Contacts>
       </div>
     );

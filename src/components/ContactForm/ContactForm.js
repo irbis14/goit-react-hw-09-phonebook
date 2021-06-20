@@ -1,4 +1,5 @@
 import { Component } from "react";
+import styles from "./ContactForm.module.css";
 
 const INITIAL_STATE = {
   name: "",
@@ -29,10 +30,11 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">
+      <form className={styles.form} onSubmit={this.handleSubmit}>
+        <label className={styles.label} htmlFor="name">
           Name
           <input
+            className={styles.input}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -42,9 +44,10 @@ class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <label>
+        <label className={styles.label}>
           Number
           <input
+            className={styles.input}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -55,6 +58,7 @@ class ContactForm extends Component {
           />
         </label>
         <button
+          className={styles.button}
           type="submit"
           // className={styles.feedbackButton}
         >
