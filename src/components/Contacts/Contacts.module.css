@@ -1,5 +1,11 @@
 .list {
-  padding-left: 30px;
+  padding-left: 20px;
   margin: 0;
   margin-top: 15px;
+}
+
+@media screen and (min-width: 480px) {
+  .list {
+    padding-left: 30px;
+  }
 }

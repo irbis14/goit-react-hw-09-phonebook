@@ -19,8 +19,6 @@ class ContactForm extends Component {
 
     this.props.onSubmit(this.state);
 
-    console.log(this.state);
-
     this.reset();
   };
 
@@ -57,11 +55,7 @@ class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <button
-          className={styles.button}
-          type="submit"
-          // className={styles.feedbackButton}
-        >
+        <button className={styles.button} type="submit">
           Add contact
         </button>
       </form>

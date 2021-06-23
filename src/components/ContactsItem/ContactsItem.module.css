@@ -1,22 +1,39 @@
 .list__item {
-  padding-bottom: 20px;
-  font-size: 18px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 480px) {
+  .list__item {
+    padding-bottom: 20px;
+    font-size: 18px;
+  }
 }
 
 .button__delete {
-  margin-left: 25px;
-  width: 90px;
-  height: 30px;
+  margin-left: 15px;
+  margin-top: 10px;
+  width: 60px;
+  height: 25px;
   border-radius: 9999em;
   outline-style: inherit;
   border: 1px solid #ec9ac0;
   background: linear-gradient(21deg, #ffbdac, #ec9ac0);
 
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
 }
 
 .button__delete:focus,
 .button__delete:hover {
   box-shadow: inset 1px 2px 5px #ffbdac, 1px 2px 5px #ec9ac0;
+}
+
+@media screen and (min-width: 480px) {
+  .button__delete {
+    margin-left: 25px;
+    font-size: 14px;
+    width: 90px;
+    height: 30px;
+  }
 }

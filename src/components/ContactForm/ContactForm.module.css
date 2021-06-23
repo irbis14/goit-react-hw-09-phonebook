@@ -5,10 +5,17 @@
 }
 
 .label {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
+}
+
+@media screen and (min-width: 480px) {
+  .label {
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
 }
 
 .input {
@@ -30,19 +37,27 @@
 }
 
 .button {
-  width: 150px;
-  height: 35px;
+  width: 140px;
+  height: 30px;
   border-radius: 9999em;
   outline-style: inherit;
   border-color: transparent;
   border: 1px solid #ace2ff;
   background: linear-gradient(21deg, #ace2ff, #9aecdb);
 
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .button:focus,
 .button:hover {
   box-shadow: inset 1px 2px 5px #1beabd, 1px 2px 5px #10abff;
+}
+
+@media screen and (min-width: 480px) {
+  .button {
+    width: 150px;
+    height: 35px;
+    font-size: 16px;
+  }
 }
