@@ -3,12 +3,14 @@ import ContactForm from "./components/ContactForm";
 import Filter from "./components/Filter";
 import Contacts from "./components/Contacts";
 import ContactsItem from "./components/ContactsItem";
+import { connect } from "react-redux";
+import * as actions from "./redux/app/app-actions";
 
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 import "./App.css";
 
-class App extends Component {
+/* class App extends Component {
   state = {
     contacts: [
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -83,5 +85,40 @@ class App extends Component {
     );
   }
 }
+ */
 
-export default App;
+const App = ({
+  filter,
+  addContact,
+  onChangeFilter,
+  filterContact,
+  deleteContact,
+}) => {
+  return (
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm onSubmit={addContact} />
+      <Filter onChangeFilter={onChangeFilter} value={filter} />
+      <Contacts>
+        <ContactsItem items={filterContact} onDeleteContact={deleteContact} />
+      </Contacts>
+    </div>
+  );
+};
+
+const mapStateToProps = (state, props) => {
+  return {
+    filter: state.filter,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addContact: (newContact) => dispatch(actions.addContact(newContact)),
+    onChangeFilter: (e) => dispatch(actions.onChangeFilter(e)),
+    filterContact: () => dispatch(actions.filterContact()),
+    deleteContact: (e) => dispatch(actions.deleteContact(e)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
