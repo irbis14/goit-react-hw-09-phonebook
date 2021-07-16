@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { connect } from "react-redux";
+
 import styles from "./ContactForm.module.css";
 
 const INITIAL_STATE = {
@@ -11,7 +13,16 @@ class ContactForm extends Component {
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+
+    if (
+      this.props.contacts.find((oldContact) => {
+        return oldContact.name.toLowerCase() === name.toLowerCase();
+      })
+    ) {
+      alert(`${name} is already in contacts`);
+    } else {
+      this.setState({ [name]: value });
+    }
   };
 
   handleSubmit = (e) => {
@@ -63,4 +74,10 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm;
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.contacts.items,
+  };
+};
+
+export default connect(mapStateToProps)(ContactForm);

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styles from "./Filter.module.css";
 
-const Filter = ({ value, onChangeFilter }) => {
+const Filter = ({ onChangeFilter }) => {
   return (
     <div className={styles.filter__container}>
       <label htmlFor="filter" className={styles.label}>
@@ -11,7 +11,6 @@ const Filter = ({ value, onChangeFilter }) => {
           type="text"
           name="filter"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          value={value}
           onChange={onChangeFilter}
         />
       </label>
@@ -20,7 +19,6 @@ const Filter = ({ value, onChangeFilter }) => {
 };
 
 Filter.propTypes = {
-  value: PropTypes.string,
   onChangeFilter: PropTypes.func,
 };
 
