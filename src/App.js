@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addContact: (newContact) => dispatch(actions.addContact(newContact)),
     onChangeFilter: (e) => dispatch(actions.onChangeFilter(e.target.value)),
-    deleteContact: (e) => dispatch(actions.deleteContact(e.target.name)),
+    deleteContact: (e) => dispatch(actions.deleteContact(e.target.id)),
   };
 };
 

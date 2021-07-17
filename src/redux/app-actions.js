@@ -1,5 +1,20 @@
-import actionTypes from "./app-types";
+import { createAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+// import actionTypes from "./app-types";
+
+export const addContact = createAction("app/onChangeFilter", (newContact) => ({
+  payload: {
+    id: uuidv4(),
+    name: newContact.name,
+    number: newContact.number,
+  },
+}));
+
+export const onChangeFilter = createAction("app/addContact");
+
+export const deleteContact = createAction("app/deleteContact");
+
+/* Without Redux Toolkit
 
 export const addContact = (newContact) => ({
   type: actionTypes.ADD_CONTACT,
@@ -17,7 +32,5 @@ export const onChangeFilter = (value) => ({
 
 export const deleteContact = (value) => ({
   type: actionTypes.DELETE_CONTACT,
-  payload: {
-    deleteName: value,
-  },
-});
+  payload: value,
+}); */
