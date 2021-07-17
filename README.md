@@ -1,1 +1,2 @@
-[React] Home work 2.2
+[React] Home work 6.
+Rewrite with Redux and Redux Toolkit
