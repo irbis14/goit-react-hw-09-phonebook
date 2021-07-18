@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import * as actions from "./redux/app-actions";
+import appOperations from "./redux/app-operations";
 
 import ContactForm from "./components/ContactForm";
 import Filter from "./components/Filter";
@@ -36,9 +37,9 @@ const mapStateToProps = ({ contacts: { items, filter } }, props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addContact: (newContact) => dispatch(actions.addContact(newContact)),
+    addContact: (newContact) => dispatch(appOperations.addContact(newContact)),
     onChangeFilter: (e) => dispatch(actions.onChangeFilter(e.target.value)),
-    deleteContact: (e) => dispatch(actions.deleteContact(e.target.id)),
+    deleteContact: (e) => dispatch(appOperations.deleteContact(e.target.id)),
   };
 };
 

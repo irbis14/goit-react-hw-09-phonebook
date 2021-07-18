@@ -1,22 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
 import contactsReducer from "./app-reducer";
-import { persistStore, persistReducer } from "redux-persist";
-import { appPersistConfig, middleware } from "./persist";
+// import { persistStore } from "redux-persist";
+import { middleware } from "./persist";
 // import { createStore, combineReducers } from "redux";
 // import { composeWithDevTools } from "redux-devtools-extension";
 
 const store = configureStore({
   reducer: {
-    contacts: persistReducer(appPersistConfig, contactsReducer),
+    contacts: contactsReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === "development",
 });
 
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { store, persistor };
+export default store;
 
 /* Without ReduxToolkit
 

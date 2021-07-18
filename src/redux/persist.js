@@ -9,12 +9,12 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-export const appPersistConfig = {
+/* export const appPersistConfig = {
   key: "items",
   storage,
   blacklist: ["filter"],
 };
-
+ */
 export const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {

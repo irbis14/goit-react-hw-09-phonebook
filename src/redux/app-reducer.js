@@ -1,6 +1,14 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
-import * as actions from "./app-actions";
+import {
+  addContactRequest,
+  addContactSuccess,
+  addContactError,
+  onChangeFilter,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
+} from "./app-actions";
 // import actionTypes from "./app-types";
 
 const INITIAL_STATE = {
@@ -11,41 +19,24 @@ const INITIAL_STATE = {
 };
 
 const items = createReducer(INITIAL_STATE.contacts.items, {
-  [actions.addContact]: (state, { payload }) => [...state, payload],
-  [actions.deleteContact]: (state, { payload }) =>
-    state.filter((contact) => contact.id !== payload),
+  [addContactSuccess]: (state, { payload }) => [...state, payload],
+  [deleteContactSuccess]: (state, { payload }) =>
+    state.filter(({ id }) => id !== +payload),
+});
+
+const loading = createReducer(false, {
+  [addContactRequest]: () => true,
+  [addContactSuccess]: () => false,
+  [addContactError]: () => false,
+  [deleteContactRequest]: () => true,
+  [deleteContactSuccess]: () => false,
+  [deleteContactError]: () => false,
 });
 
 const filter = createReducer(INITIAL_STATE.contacts.filter, {
-  [actions.onChangeFilter]: (_, { payload }) => payload,
+  [onChangeFilter]: (_, { payload }) => payload,
 });
 
-const contactsReducer = combineReducers({ items, filter });
+const contactsReducer = combineReducers({ items, filter, loading });
 
 export default contactsReducer;
-
-/* Without Redux Toolkit
-
-const items = (state = INITIAL_STATE.contacts.items, { type, payload }) => {
-  switch (type) {
-    case actionTypes.ADD_CONTACT:
-      return [...state, payload];
-
-    case actionTypes.DELETE_CONTACT:
-      return state.filter((contact) => contact.name !== payload);
-
-    default:
-      return state;
-  }
-};
-
-const filter = (state = INITIAL_STATE.contacts.filter, { type, payload }) => {
-  switch (type) {
-    case actionTypes.ON_CHANGE_FILTER:
-      return payload;
-
-    default:
-      return state;
-  }
-};
- */
