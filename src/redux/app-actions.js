@@ -2,7 +2,7 @@ import { createAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 // import actionTypes from "./app-types";
 
-export const addContact = createAction("app/onChangeFilter", (newContact) => ({
+export const addContact = createAction("app/addContact", (newContact) => ({
   payload: {
     id: uuidv4(),
     name: newContact.name,
@@ -10,7 +10,7 @@ export const addContact = createAction("app/onChangeFilter", (newContact) => ({
   },
 }));
 
-export const onChangeFilter = createAction("app/addContact");
+export const onChangeFilter = createAction("app/onChangeFilter");
 
 export const deleteContact = createAction("app/deleteContact");
 

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from "../../redux/app-actions";
 
 import styles from "./ContactForm.module.css";
 
@@ -14,21 +15,21 @@ class ContactForm extends Component {
   handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (
-      this.props.contacts.find((oldContact) => {
-        return oldContact.name.toLowerCase() === name.toLowerCase();
-      })
-    ) {
-      alert(`${name} is already in contacts`);
-    } else {
-      this.setState({ [name]: value });
-    }
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state);
+    if (
+      this.props.contacts.find((oldContact) => {
+        return oldContact.name.toLowerCase() === this.state.name.toLowerCase();
+      })
+    ) {
+      alert(`${this.state.name} is already in contacts`);
+    } else {
+      this.props.addContact(this.state);
+    }
 
     this.reset();
   };
@@ -80,4 +81,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ContactForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addContact: (newContact) => dispatch(actions.addContact(newContact)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
