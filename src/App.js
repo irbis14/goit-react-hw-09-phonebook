@@ -1,45 +1,62 @@
 import { connect } from "react-redux";
 import * as actions from "./redux/app-actions";
-import appOperations from "./redux/app-operations";
+import operations from "./redux/app-operations";
+import selectors from "./redux/app-selectors";
 
+import { Component } from "react";
 import ContactForm from "./components/ContactForm";
 import Filter from "./components/Filter";
 import Contacts from "./components/Contacts";
 import ContactsItem from "./components/ContactsItem";
+import Loader from "react-loader-spinner";
 
 import "./App.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import styles from "./components/Loader/Loader.module.css";
 
-const App = ({ filter, addContact, onChangeFilter, deleteContact }) => {
-  return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm onSubmit={addContact} />
-      <Filter onChangeFilter={onChangeFilter} />
-      <Contacts>
-        <ContactsItem items={filter} onDeleteContact={deleteContact} />
-      </Contacts>
-    </div>
-  );
-};
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchContact();
+  }
 
-const filterContact = (contacts, filter) => {
-  const normalizedFilter = filter.toLowerCase();
-  return contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
-};
+  render() {
+    const { filter, onChangeFilter, deleteContact, isLoading } = this.props;
+    return (
+      <div>
+        <h1>Phonebook</h1>
+        <ContactForm />
 
-const mapStateToProps = ({ contacts: { items, filter } }, props) => {
+        <Filter onChangeFilter={onChangeFilter} />
+
+        {isLoading && (
+          <Loader
+            className={styles.Loader}
+            type="ThreeDots"
+            color="#9aecdb"
+            height={15}
+            width={80}
+          />
+        )}
+        <Contacts>
+          <ContactsItem items={filter} onDeleteContact={deleteContact} />
+        </Contacts>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state, props) => {
   return {
-    filter: filterContact(items, filter),
+    filter: selectors.getFilterContact(state),
+    isLoading: selectors.getLoading(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addContact: (newContact) => dispatch(appOperations.addContact(newContact)),
+    fetchContact: () => dispatch(operations.fetchContact()),
     onChangeFilter: (e) => dispatch(actions.onChangeFilter(e.target.value)),
-    deleteContact: (e) => dispatch(appOperations.deleteContact(e.target.id)),
+    deleteContact: (e) => dispatch(operations.deleteContact(e.target.id)),
   };
 };
 

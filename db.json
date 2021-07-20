@@ -1,24 +1,19 @@
 {
   "contacts": [
     {
-      "name": "nina",
-      "number": "12345",
+      "name": "John",
+      "number": "2345678",
       "id": 1
     },
     {
-      "name": "nina",
-      "number": "123456",
+      "name": "Mary",
+      "number": "4567890",
       "id": 2
     },
     {
-      "name": "hjkl",
-      "number": "56789",
+      "name": "Dave",
+      "number": "456789",
       "id": 3
-    },
-    {
-      "name": "fghjkl",
-      "number": "45678",
-      "id": 5
     }
   ]
 }

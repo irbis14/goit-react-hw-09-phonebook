@@ -1,2 +1,1 @@
-[React] Home work 6.
-Rewrite with Redux and Redux Toolkit
+[React] Home work 7. Selectors and Memoization
