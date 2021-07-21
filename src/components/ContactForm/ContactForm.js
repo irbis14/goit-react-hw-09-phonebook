@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import operations from "../../redux/app-operations";
-import selectors from "../../redux/app-selectors";
+import { operations, selectors } from "../../redux";
 
 import styles from "./ContactForm.module.css";
 

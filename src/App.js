@@ -1,7 +1,5 @@
 import { connect } from "react-redux";
-import * as actions from "./redux/app-actions";
-import operations from "./redux/app-operations";
-import selectors from "./redux/app-selectors";
+import { operations, selectors, onChangeFilter } from "./redux";
 
 import { Component } from "react";
 import ContactForm from "./components/ContactForm";
@@ -45,7 +43,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state, _) => {
   return {
     filter: selectors.getFilterContact(state),
     isLoading: selectors.getLoading(state),
@@ -55,7 +53,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchContact: () => dispatch(operations.fetchContact()),
-    onChangeFilter: (e) => dispatch(actions.onChangeFilter(e.target.value)),
+    onChangeFilter: (e) => dispatch(onChangeFilter(e.target.value)),
     deleteContact: (e) => dispatch(operations.deleteContact(e.target.id)),
   };
 };
