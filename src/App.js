@@ -25,12 +25,11 @@ class App extends Component {
         <ContactForm />
 
         <Filter onChangeFilter={onChangeFilter} />
-
         {isLoading && (
           <Loader
             className={styles.Loader}
             type="ThreeDots"
-            color="#9aecdb"
+            color="#31eecb"
             height={15}
             width={80}
           />
