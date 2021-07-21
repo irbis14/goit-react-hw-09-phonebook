@@ -4,14 +4,7 @@
   margin-left: 5px;
   padding: 5px 15px;
   width: 280px;
-  /* background: linear-gradient(21deg, #f0f8f8, #f1f5fc); */
-  background-color: #bef0f0;
-  background-image: linear-gradient(
-    45deg,
-    #bef0f0 0%,
-    #f0e7fb 46%,
-    #e8f7e8 100%
-  );
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
 
   border-radius: 15px;
 }
