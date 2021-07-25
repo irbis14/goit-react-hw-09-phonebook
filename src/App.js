@@ -1,4 +1,56 @@
-import { connect } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import Container from "./components/Container";
+import AppBar from "./components/Navigation/AppBar";
+
+import Loader from "react-loader-spinner";
+import styles from "./components/Loader/Loader.module.css";
+
+const HomePage = lazy(() =>
+  import("./pages/HomePage" /*webpackChunkName: "home-page"*/)
+);
+const PhonebookPage = lazy(() =>
+  import("./pages/PhonebookPage" /*webpackChunkName: "phonebook-page"*/)
+);
+const LoginPage = lazy(() =>
+  import("./pages/LoginPage" /*webpackChunkName: "login-page"*/)
+);
+const RegisterPage = lazy(() =>
+  import("./pages/RegisterPage" /*webpackChunkName: "register-page"*/)
+);
+
+const App = () => (
+  <>
+    <Container>
+      <AppBar />
+      <Suspense
+        fallback={
+          <Loader
+            className={styles.Loader}
+            type="ThreeDots"
+            color="#31eecb"
+            height={15}
+            width={80}
+          />
+        }
+      >
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/phonebook" component={PhonebookPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          {/*  <Route>
+          <Redirect to="/404" /> <NotFoundPage />
+        </Route> */}
+        </Switch>
+      </Suspense>
+    </Container>
+  </>
+);
+
+export default App;
+
+/* import { connect } from "react-redux";
 import { operations, selectors, onChangeFilter } from "./redux";
 
 import { Component } from "react";
@@ -58,3 +110,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+ */
