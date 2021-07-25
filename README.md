@@ -1,1 +1,1 @@
-[React] Home work 7. Selectors and Memoization
+[React] Home work 8. Login and user registration
