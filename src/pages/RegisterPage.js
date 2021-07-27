@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { authOperations } from '../redux/auth';
+import { authOperations } from "../redux/auth";
 
 import styles from "./RegisterPage.module.css";
 
@@ -72,10 +72,8 @@ class RegisterPage extends Component {
   }
 }
 
-// const mapDispatchToProps = {
-//   onRegister: authOperations.register,
-// };
+const mapDispatchToProps = {
+  onRegister: authOperations.register,
+};
 
-// export default connect(null, mapDispatchToProps)(RegisterPage);
-
-export default RegisterPage;
+export default connect(null, mapDispatchToProps)(RegisterPage);
