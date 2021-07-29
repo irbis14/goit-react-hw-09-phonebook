@@ -11,8 +11,6 @@ import {
   deleteContactError,
 } from "./app-actions";
 
-axios.defaults.baseURL = "http://localhost:4040";
-
 const fetchContact = () => async (dispatch) => {
   dispatch(fetchContactRequest());
 
@@ -20,7 +18,7 @@ const fetchContact = () => async (dispatch) => {
     const { data } = await axios.get("/contacts");
     dispatch(fetchContactSuccess(data));
   } catch (error) {
-    dispatch(fetchContactError(error));
+    dispatch(fetchContactError(error.message));
   }
 
   /* axios
@@ -40,7 +38,7 @@ const addContact = (newContact) => (dispatch) => {
   axios
     .post("/contacts", items)
     .then(({ data }) => dispatch(addContactSuccess(data)))
-    .catch((error) => dispatch(addContactError(error)));
+    .catch((error) => dispatch(addContactError(error.message)));
 };
 
 const deleteContact = (id) => (dispatch) => {
@@ -49,7 +47,7 @@ const deleteContact = (id) => (dispatch) => {
   axios
     .delete(`/contacts/${id}`)
     .then(() => dispatch(deleteContactSuccess(id)))
-    .catch((error) => dispatch(deleteContactError(error)));
+    .catch((error) => dispatch(deleteContactError(error.message)));
 };
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */

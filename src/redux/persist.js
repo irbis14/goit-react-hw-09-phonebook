@@ -7,13 +7,14 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-/* export const appPersistConfig = {
-  key: "items",
+export const appPersistConfig = {
+  key: "auth",
   storage,
-  blacklist: ["filter"],
+  whitelist: ["token"],
 };
- */
+
 export const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {

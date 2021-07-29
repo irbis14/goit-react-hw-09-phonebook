@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { authOperations } from "../redux/auth";
+import { authOperations } from "../redux/auth";
 import styles from "./LoginPage.module.css";
 
 class LoginPage extends Component {
@@ -60,9 +60,8 @@ class LoginPage extends Component {
   }
 }
 
-// const mapDispatchToProps = {
-//   onLogin: authOperations.logIn,
-// };
+const mapDispatchToProps = {
+  onLogin: authOperations.logIn,
+};
 
-// export default connect(null, mapDispatchToProps)(LoginPage);
-export default LoginPage;
+export default connect(null, mapDispatchToProps)(LoginPage);
