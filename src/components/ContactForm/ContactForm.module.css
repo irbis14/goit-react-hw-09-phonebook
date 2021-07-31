@@ -6,7 +6,6 @@
 
 .label {
   margin-bottom: 10px;
-
   font-size: 14px;
   font-weight: 500;
 }
@@ -42,8 +41,8 @@
   border-radius: 9999em;
   outline-style: inherit;
   border-color: transparent;
-  border: 1px solid #ace2ff;
-  background: linear-gradient(21deg, #ace2ff, #9aecdb);
+  border: 1px solid #1beabd;
+  background: linear-gradient(21deg, #ace2ff, #1beabd);
 
   font-size: 14px;
   font-weight: 700;

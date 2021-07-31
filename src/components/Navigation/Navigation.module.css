@@ -1,11 +1,39 @@
 .link {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   padding: 12px;
+  font-size: 14px;
   font-weight: 700;
   color: #2a363b;
 }
 
+@media screen and (max-width: 719px) and (min-width: 480px) {
+  .link {
+    display: inline-block;
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .link {
+    display: inline-block;
+    font-size: 18px;
+  }
+}
+
 .activeLink {
-  color: #e84a5f;
+  color: #e84a79;
+}
+
+.link:focus,
+.link:hover {
+  color: #e84a79;
+  box-shadow: 0 8px 6px -6px #e84a79;
+}
+
+.activeLink:focus,
+.activeLink:hover {
+  color: #2a363b;
+  box-shadow: 0 8px 6px -6px #10cfff;
 }

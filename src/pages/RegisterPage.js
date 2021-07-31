@@ -27,8 +27,8 @@ class RegisterPage extends Component {
     const { name, email, password } = this.state;
 
     return (
-      <div>
-        <h1>Sign up</h1>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Sign up</h1>
 
         <form
           onSubmit={this.handleSubmit}
@@ -38,6 +38,7 @@ class RegisterPage extends Component {
           <label className={styles.label}>
             Name
             <input
+              className={styles.input}
               type="text"
               name="name"
               value={name}
@@ -48,6 +49,7 @@ class RegisterPage extends Component {
           <label className={styles.label}>
             E-mail
             <input
+              className={styles.input}
               type="email"
               name="email"
               value={email}
@@ -58,14 +60,18 @@ class RegisterPage extends Component {
           <label className={styles.label}>
             Password
             <input
+              className={styles.input}
               type="password"
               name="password"
               value={password}
               onChange={this.handleChange}
             />
           </label>
-
-          <button type="submit">Sign up</button>
+          <div className={styles.button__container}>
+            <button className={styles.button} type="submit">
+              Sign up
+            </button>
+          </div>
         </form>
       </div>
     );

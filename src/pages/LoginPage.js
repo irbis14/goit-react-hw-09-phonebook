@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
 import { authOperations } from "../redux/auth";
 import styles from "./LoginPage.module.css";
@@ -25,8 +25,8 @@ class LoginPage extends Component {
     const { email, password } = this.state;
 
     return (
-      <div>
-        <h1>Log in</h1>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Log in</h1>
 
         <form
           onSubmit={this.handleSubmit}
@@ -36,24 +36,28 @@ class LoginPage extends Component {
           <label className={styles.label}>
             E-mail
             <input
+              className={styles.input}
               type="email"
               name="email"
               value={email}
               onChange={this.handleChange}
             />
           </label>
-
           <label className={styles.label}>
             Password
             <input
+              className={styles.input}
               type="password"
               name="password"
               value={password}
               onChange={this.handleChange}
             />
           </label>
-
-          <button type="submit">Log in</button>
+          <div className={styles.button__container}>
+            <button className={styles.button} type="submit">
+              Log in
+            </button>
+          </div>
         </form>
       </div>
     );

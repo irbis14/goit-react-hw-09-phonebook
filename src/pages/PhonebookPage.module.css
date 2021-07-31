@@ -2,11 +2,15 @@
   margin-top: 30px;
   margin-right: 5px;
   margin-left: 5px;
+  margin-bottom: 30px;
   padding: 5px 15px;
-  width: 280px;
   background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
-
   border-radius: 15px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
 }
 
 @media screen and (min-width: 480px) {
@@ -15,6 +19,9 @@
     margin-left: auto;
     margin-top: 50px;
     padding: 50px 100px;
-    width: 400px;
+    max-width: 500px;
+  }
+  .title {
+    font-size: 36px;
   }
 }

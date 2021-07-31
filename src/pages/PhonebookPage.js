@@ -21,7 +21,7 @@ class PhonebookPage extends Component {
     const { filter, onChangeFilter, deleteContact, isLoading } = this.props;
     return (
       <div className={styles.container}>
-        <h1>Phonebook</h1>
+        <h1 className={styles.title}>Phonebook</h1>
         <ContactForm />
 
         <Filter onChangeFilter={onChangeFilter} />
@@ -29,7 +29,7 @@ class PhonebookPage extends Component {
           <Loader
             className={stylesLoader.Loader}
             type="ThreeDots"
-            color="#31eecb"
+            color="#1beabd"
             height={15}
             width={80}
           />
