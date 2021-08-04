@@ -1,6 +1,6 @@
 import { Switch, Redirect } from "react-router-dom";
-import { Component, lazy, Suspense } from "react";
-import { connect } from "react-redux";
+import { lazy, Suspense, useEffect, memo } from "react";
+import { useDispatch } from "react-redux";
 import { authOperations } from "./redux/auth";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -25,57 +25,53 @@ const NotFoundPage = lazy(() =>
   import("./pages/NotFoundPage" /*webpackChunkName: "not-found-page"*/)
 );
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
+const App = () => {
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <Container>
-        <AppBar />
-        <Suspense
-          fallback={
-            <Loader
-              className={styles.Loader}
-              type="ThreeDots"
-              color="#1beabd"
-              height={15}
-              width={80}
-            />
-          }
-        >
-          <Switch>
-            <PublicRoute exact path="/" component={HomePage} />
-            <PublicRoute
-              path="/register"
-              restricted
-              redirectTo="/contacts"
-              component={RegisterPage}
-            />
-            <PublicRoute
-              path="/login"
-              restricted
-              redirectTo="/contacts"
-              component={LoginPage}
-            />
-            <PrivateRoute
-              path="/contacts"
-              redirectTo="/login"
-              component={PhonebookPage}
-            />
-            <PublicRoute>
-              <Redirect to="/404" /> <NotFoundPage />
-            </PublicRoute>
-          </Switch>
-        </Suspense>
-      </Container>
-    );
-  }
-}
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser);
+  }, [dispatch]);
 
-const mapDispatchToProps = {
-  onGetCurrentUser: authOperations.getCurrentUser,
+  return (
+    <Container>
+      <AppBar />
+      <Suspense
+        fallback={
+          <Loader
+            className={styles.Loader}
+            type="ThreeDots"
+            color="#1beabd"
+            height={15}
+            width={80}
+          />
+        }
+      >
+        <Switch>
+          <PublicRoute exact path="/" component={HomePage} />
+          <PublicRoute
+            path="/register"
+            restricted
+            redirectTo="/contacts"
+            component={RegisterPage}
+          />
+          <PublicRoute
+            path="/login"
+            restricted
+            redirectTo="/contacts"
+            component={LoginPage}
+          />
+          <PrivateRoute
+            path="/contacts"
+            redirectTo="/login"
+            component={PhonebookPage}
+          />
+          <PublicRoute>
+            <Redirect to="/404" /> <NotFoundPage />
+          </PublicRoute>
+        </Switch>
+      </Suspense>
+    </Container>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default memo(App);

@@ -1,1 +1,1 @@
-[React] Home work 8. Login and user registration
+[React] Home work 9. Rewrite with React Hooks

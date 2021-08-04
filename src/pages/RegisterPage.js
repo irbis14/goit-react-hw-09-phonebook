@@ -1,85 +1,93 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { authOperations } from "../redux/auth";
 
 import styles from "./RegisterPage.module.css";
 
-class RegisterPage extends Component {
-  state = {
-    name: "",
-    email: "",
-    password: "",
+const RegisterPage = () => {
+  const dispatch = useDispatch();
+  const onRegister = useCallback(
+    (user) => dispatch(authOperations.register(user)),
+    [dispatch]
+  );
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+
+      case "email":
+        setEmail(value);
+        break;
+
+      case "password":
+        setPassword(value);
+        break;
+
+      default:
+        console.log("Something is wrong");
+    }
   };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onRegister(this.state);
+    onRegister({ name, email, password });
 
-    this.setState({ name: "", email: "", password: "" });
+    setName("");
+    setEmail("");
+    setPassword("");
   };
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>Sign up</h1>
 
-  render() {
-    const { name, email, password } = this.state;
+      <form onSubmit={handleSubmit} className={styles.form} autoComplete="off">
+        <label className={styles.label}>
+          Name
+          <input
+            className={styles.input}
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
+        </label>
 
-    return (
-      <div className={styles.container}>
-        <h1 className={styles.title}>Sign up</h1>
+        <label className={styles.label}>
+          E-mail
+          <input
+            className={styles.input}
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+        </label>
 
-        <form
-          onSubmit={this.handleSubmit}
-          className={styles.form}
-          autoComplete="off"
-        >
-          <label className={styles.label}>
-            Name
-            <input
-              className={styles.input}
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <label className={styles.label}>
-            E-mail
-            <input
-              className={styles.input}
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <label className={styles.label}>
-            Password
-            <input
-              className={styles.input}
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-          </label>
-          <div className={styles.button__container}>
-            <button className={styles.button} type="submit">
-              Sign up
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  onRegister: authOperations.register,
+        <label className={styles.label}>
+          Password
+          <input
+            className={styles.input}
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </label>
+        <div className={styles.button__container}>
+          <button className={styles.button} type="submit">
+            Sign up
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(RegisterPage);
+export default RegisterPage;

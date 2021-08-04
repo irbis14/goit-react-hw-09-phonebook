@@ -1,7 +1,6 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { operations, selectors, onChangeFilter } from "../redux";
-
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import ContactForm from "../components/ContactForm";
 import Filter from "../components/Filter";
 import Contacts from "../components/Contacts";
@@ -12,49 +11,38 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import stylesLoader from "../components/Loader/Loader.module.css";
 import styles from "./PhonebookPage.module.css";
 
-class PhonebookPage extends Component {
-  componentDidMount() {
-    this.props.fetchContact();
-  }
+const PhonebookPage = () => {
+  const filter = useSelector(selectors.getFilterContact);
+  const isLoading = useSelector(selectors.getLoading);
 
-  render() {
-    const { filter, onChangeFilter, deleteContact, isLoading } = this.props;
-    return (
-      <div className={styles.container}>
-        <h1 className={styles.title}>Phonebook</h1>
-        <ContactForm />
+  const dispatch = useDispatch();
+  const onFilterChange = (e) => dispatch(onChangeFilter(e.target.value));
+  const deleteContact = (e) => dispatch(operations.deleteContact(e.target.id));
 
-        <Filter onChangeFilter={onChangeFilter} />
-        {isLoading && (
-          <Loader
-            className={stylesLoader.Loader}
-            type="ThreeDots"
-            color="#1beabd"
-            height={15}
-            width={80}
-          />
-        )}
-        <Contacts>
-          <ContactsItem items={filter} onDeleteContact={deleteContact} />
-        </Contacts>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    dispatch(operations.fetchContact());
+  }, [dispatch]);
 
-const mapStateToProps = (state, _) => {
-  return {
-    filter: selectors.getFilterContact(state),
-    isLoading: selectors.getLoading(state),
-  };
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>Phonebook</h1>
+      <ContactForm />
+
+      <Filter onChangeFilter={onFilterChange} />
+      {isLoading && (
+        <Loader
+          className={stylesLoader.Loader}
+          type="ThreeDots"
+          color="#1beabd"
+          height={15}
+          width={80}
+        />
+      )}
+      <Contacts>
+        <ContactsItem items={filter} onDeleteContact={deleteContact} />
+      </Contacts>
+    </div>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchContact: () => dispatch(operations.fetchContact()),
-    onChangeFilter: (e) => dispatch(onChangeFilter(e.target.value)),
-    deleteContact: (e) => dispatch(operations.deleteContact(e.target.id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhonebookPage);
+export default PhonebookPage;
