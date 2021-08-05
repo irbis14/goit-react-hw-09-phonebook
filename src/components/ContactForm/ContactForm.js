@@ -39,7 +39,7 @@ const ContactForm = () => {
         return oldContact.name.toLowerCase() === newName.toLowerCase();
       })
     ) {
-      alert(`${newName.name} is already in contacts`);
+      alert(`${newName} is already in contacts`);
     } else {
       addContact({ name: newName, number: newNumber });
     }
