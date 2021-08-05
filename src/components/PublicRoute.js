@@ -3,23 +3,20 @@ import { useSelector } from "react-redux";
 import { authSelectors } from "../redux/auth";
 
 const PublicRoute = ({
-  component: Component,
   isAuthenticated,
   redirectTo,
+  children,
   ...routeProps
 }) => {
   const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);
   return (
-    <Route
-      {...routeProps}
-      render={(props) =>
-        isLoggedIn && routeProps.restricted ? (
-          <Redirect to={redirectTo} />
-        ) : (
-          <Component {...props} />
-        )
-      }
-    />
+    <Route {...routeProps}>
+      {isLoggedIn && routeProps.restricted ? (
+        <Redirect to={redirectTo} />
+      ) : (
+        children
+      )}
+    </Route>
   );
 };
 
